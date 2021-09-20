@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    width: 500px;
+    height: 700px;
+    margin: 10px auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+.form-box {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    background-color: #fcffa67a;
+    border-radius: 10px;
+}
+
+form.login, form.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#log {
+    position: absolute;
+    left: 50px;
+    top: 150px;
+    transition: .5s;
+}
+
+#reg {
+    position: absolute;
+    left: 550px;
+    top: 35px;
+    height: 630px;
+    transition: .5s;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    width: 100%;
+    height: 75px;
+    margin-bottom: 5px;
+}
+
+.input-group.gender {
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.input-label {
+    display: inline-block;
+    width: 100%;
+    padding: 0 10px;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.input-label-gender {
+    display: inline-block;
+    width: 60px;
+    padding: 0 10px;
+    margin-right: 50px;
+}
+
+.input-group.gender span{
+    margin-right: 20px;
+}
+
+.form-control {
+    display: inline-block;
+    width: 95%;
+    margin: 0 10px 2px 10px;
+    border-bottom: 2px solid rgb(150, 147, 150);
+    outline: none;
+    background: transparent;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 1rem;
+}
+
+.form-message {
+    display: inline-block;
+    width: 100%;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 200;
+    visibility: hidden;
+}
+
+.form-message.error {
+    color: #BD1616;
+    visibility: visible;
+}
+
+#log .input-group {
+    margin-top: 25px;
+}
+
+.btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    width: 125px;
+    height: 30px;
+    color: #fff;
+    background-color: #57CC99;
+    outline: none;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    transition: .15s background-color;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #000;
+}
+
+.toggle {
+    position: absolute;
+    left: 15px;
+    border: none;
+    border-bottom: 1px solid #000;
+    background: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#reg .toggle{
+    left: 70px;
+}

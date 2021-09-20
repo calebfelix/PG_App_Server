@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sign In</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="icon" href="media/favicon.ico">
+    </head>
+    <body>
+        <div class="container">
+            <!-- login form -->
+            <div class="form-box" id="log">
+                <form id="login" class="login" method="POST">
+                    <h2 class="title">Login</h2>
+                    <div class="input-group">
+                        <label for="username" class="input-label">Email ID</label>
+                        <input type="email" id="username" class="form-control" placeholder="Your Email ID">
+                        <small class="form-message" id="log-email-err">Test</small>
+                    </div>
+                    <div class="input-group">
+                        <label for="password0" class="input-label">Password</label>
+                        <input type="password" id="password0" class="form-control" placeholder="Password">
+                        <small class="form-message" id="log-pass-err">Test</small>
+                    </div>
+                    <button class="btn" id="login-btn" type="submit">Log in</button>
+                </form>
+                <div class="toggler">
+                    <button id="register-tgl" class="toggle" type="button" onclick="register()">Do not have an Account? Click here to Register one!</button>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="form-box" id="reg">
+                <h2 class="title">Register</h2>
+                <form class="register" id="register" method="POST">
+                    <div class="input-group">
+                        <label for="name" class="input-label">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="First-Name Last-Name">
+                        <small class="form-message" id="reg-name-err">Test</small>
+                    </div>
+                    <div class="input-group">
+                        <label for="email" class="input-label">Email Id</label>
+                        <input type="email" id="email" class="form-control" placeholder="Your Email ID">
+                        <small class="form-message" id="reg-email-err">Test</small>
+                    </div>
+                    <div class="input-group">
+                        <label for="mobile" class="input-label">Mobile No</label>
+                        <input type="tel" id="mobile" class="form-control" placeholder="Mobile Number">
+                        <small class="form-message" id="reg-mobile-err">Test</small>
+                    </div>
+                    <div class="input-group gender">
+                        <label for="gender" class="input-label-gender">Gender</label>
+                        <input type="radio" class="gender" value="Male" name="gender"><span>Male</span>
+                        <input type="radio" class="gender" value="Female" name="gender"><span>Female</span>
+                        <input type="radio" class="gender" value="Other" name="gender"><span>Other</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="password1" class="input-label">Password</label>
+                        <input type="password" id="password1" class="form-control" placeholder="Password">
+                        <small class="form-message" id="reg-pass-err">Test</small>
+                    </div>
+                    <div class="input-group">
+                        <label for="password2" class="input-label">Confirm Password</label>
+                        <input type="password" id="password2" class="form-control" placeholder="Re-enter Your Password">
+                        <small class="form-message" id="reg-repass-err">Test</small>
+                    </div>
+                    <button class="btn" id="register-btn" type="submit">Sign Up</button>
+                </form>
+                <div class="toggler">
+                    <button id="login-tgl" class="toggle" type="button" onclick="login()">Have an Account? Click here to Login!</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let x = document.getElementById("log");
+            let y = document.getElementById("reg");
+            let z = document.getElementById("login-tgl");
+            let w = document.getElementById("register-tgl")
+
+            function register() {
+                x.style.left = "-550px";
+                y.style.left = "50px";
+            }
+
+            function login() {
+                x.style.left = "50px";
+                y.style.left = "550px";
+            }
+        </script>
+        <script src="validation.js"></script>
+    </body>
+</html>
