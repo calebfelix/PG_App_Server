@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="media/favicon.ico">
+        <title>Find-a-PG</title>
+    </head>
+    <body>
+        <section class = "showcase">
+            <header>
+                <button class = "Signup-button" type="button"><a class="signup-text" href="Signup.html">Sign In</a></button>
+                <div class="toggle"></div>
+            </header>
+            <video src="media/Apart2.mp4" muted loop autoplay height="700px" width="1250px"></video>
+                
+            <div class="overlay"></div>
+
+            <div class="text">
+                <h2>Looking for a PG?</h2>
+                <h3>We got you covered!</h3>
+                <p>
+                    Find yourself a good roof from various cities listed on our website!
+                </p>
+                <a href="#">Explore</a>
+            </div>
+            <ul class="social">
+                <li><a href="#"><img src="media/facebook.png" alt="Facebook"></a></li>
+                <li><a href="#"><img src="media/instagram.png" alt="Instagram"></a></li>
+            </ul>
+        </section>
+        <div class="menu">
+            <ul>
+                <li><a href="Signup.html">Home</a></li>
+                <li><a href="Signup.html">Signup</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#"></a></li>
+            </ul>
+        </div>
+        <script>
+            const menuToggle = document.querySelector('.toggle')
+            const showcase = document.querySelector('.showcase')
+
+            menuToggle.addEventListener('click',()=>{
+                menuToggle.classList.toggle('active')
+                showcase.classList.toggle('active')
+            })
+        </script>
+    </body>
+</html>
