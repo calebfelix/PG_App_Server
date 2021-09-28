@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mar{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>helo</h1>
+    <div style="width: 30%;">
+        <form id="reg" style="display: flex; flex-direction: column;">
+            <h2 class="title">Login</h2>
+                <label for="Apartment_Name" class="mar">Name of Apartment</label>
+                <input type="text" name="Apartment_Name" id="Apartment_Name"  placeholder="Name of Apartment">
+
+                <label for="Location" class="mar">Location</label>
+                <input type="text"  name="Location" id="Location" placeholder="Location">
+
+                <label for="Owner_Name" class="mar">Owner Name</label>
+                <input type="text"  name="Owner_Name" id="Owner_Name" placeholder="Owner Name">
+
+                <label for="Owner_Contact" class="mar">owner Contact no</label>
+                <input type="text"  name="Owner_Contact" id="Owner_Contact" placeholder="owner Contact no">
+
+                <label for="Owner_Email" class="mar">owner email</label>
+                <input type="email"  name="Owner_Email" id="Owner_Email" placeholder="owner email">
+
+                <label for="Deposit" class="mar">Deposit</label>
+                <input type="text"  name="Deposit" id="Deposit" placeholder="Deposit">
+
+                <label for="Description" class="mar">Description</label>
+                ​<textarea id="Description" name="Description" id="Description" placeholder="Description" rows="10" cols="70"></textarea>
+
+                <label for="Accommodation" class="mar">Accommodation Type</label>
+                <input type="text"  name="Accommodation" id="Accommodation" placeholder="Accommodation Type">
+
+                <label for="Notice_Period" class="mar">Notice Period</label>
+                <input type="text"  name="Notice_Period" id="Notice_Period" placeholder="Notice Period">
+
+            <button class="mar" id="login-btn" type="submit">Log in</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="reg.js"></script>
+</body>
+</html>

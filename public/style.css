@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,800;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,800;1,500&display=swap');
 
 * {
     box-sizing: border-box;
@@ -204,7 +204,6 @@
 }
 
 /* Css for Homepage */
-
 .TopNav{
     background-color: #57CC99;
     margin-bottom: 25px;
@@ -238,4 +237,63 @@
 
 .btn.btn-outline.my-2.my-sm-0:hover {
     background-color: #0ceb8a;
+}
+
+/* CSS for card */
+.card{
+    /* margin: 10px; */
+    flex-direction: column;
+    /* align-items: center; */
+}
+.card .card-img-top{
+    /* margin-top: 20px; */
+    height: 250px;
+    object-fit: contain;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+}
+.dropdown-container{
+    position: relative;
+}
+.container-fluid{
+    /* padding: 20px; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.card .card-body{
+    
+}
+
+
+
+.loader {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*.loader > img{*/
+/*    width: 100px;*/
+/*}*/
+
+.loader.hidden {
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

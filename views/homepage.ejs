@@ -12,6 +12,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     </head>
     <body>
+
+        <!-- loader -->
+        <div class="loader">
+            <img src="./media/loading.gif" alt="Loading..."/>
+        </div>
+
+
         <!-- Navigation Bar  -->
         <div class="TopNav">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -21,17 +28,71 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="Index.html">Home</a></li>
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
+                        </form>
                         <li class="nav-item"><a href="#" class="nav-link">Register a Property</a></li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
-                    </form>                  
+                        <div class="dropdown-container">
+                            <li class="nav-item-dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="">Accommodation</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Both</a>
+                                    <a class="dropdown-item" href="#">Boys</a>
+                                    <a class="dropdown-item" href="#">Girls</a>
+                                </div>
+                            </li>
+                        </div>
+                        <button class="btn btn-outline my-2 my-sm-0" type="submit">Logout</button>
+                    </ul>                 
                 </div>
             </nav>
         </div>
-
         <!-- Homes for display -->
+        <div class="container-fluid">
+            <div class="row">
+                <% mydata.data.forEach(function(pst) { %>
+                    <div class="card col-md-4">
+                        <img src="<%= pst.img_url[0] %>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= pst.Apartment_Name %></h5>
+                          <!-- Apartment Name : <b><%= pst.Apartment_Name %></b> <br> -->
+                          <b>Location :</b> <%= pst.Location %> <br>
+                          <b>Owner Name :</b> <%= pst.Owner_Name %>
+                          <p class="card-text"><b>Description :</b> <%= pst.Description.slice(0, 150) + "  . . ." %></p>
+                          <a href="api/posts/<%= pst._id %>" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                <% }); %>  
+              
+            </div>
+        </div>
+        <br>
+        <div class="footer">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+        </div>
+
+        <script>
+            window.addEventListener("load", function () {
+        const loader = document.querySelector(".loader");
+        loader.className += " hidden"; //class loader hidden
+    });
+        </script>
     </body>
 </html>
