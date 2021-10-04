@@ -1,0 +1,222 @@
+/* CSS rules for registering the property */
+
+body{
+    /* background: url(./media/signupBack.jpg) ; */
+    background-image: linear-gradient(to bottom right, rgb(255, 255, 255),#77D970);
+    /* object-fit: cover; */
+}
+
+
+.form-container{
+    background-color:#57CC99;
+    margin: 0 auto;
+    color: #fff;
+    font-weight: 400;
+    width: 40vw;
+    border-radius: 15px;
+}
+
+
+
+.register-property {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(122, 122, 122, 0.308);
+    font-weight: 600;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.head-title {
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+.input-group {
+    min-width: 320px;
+    height: 100px;
+    margin-bottom: 10px;
+    position: relative;
+    padding: 5px 10px;
+}
+
+.input-group.grp-6 {
+    height: 168px;
+}
+
+.input-group.grp-6 .form-input {
+    height: 100px;
+}
+
+.input-group.grp-2, .input-group.grp-8, .input-group.grp-11, 
+.input-group.grp-12, .input-group.grp-13,
+.input-group.grp-14 {
+    height: 50px;
+}
+
+.form-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 1.25rem;
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    height: 2rem;
+    font-size: 1.15rem;
+    border-bottom: 1px solid #fff;
+    background: none;
+    outline: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    color: #fff;
+}
+
+select.form-input {
+    width: 40%;
+    margin-left: 30px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+small.form-message{
+    font-size: .75rem;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.616);
+}
+
+option {
+    color: black;
+    font-family: 500;
+}
+
+.input-group.grp-16 {
+    height: fit-content;
+}
+
+.input-group.grp-16 .imgcontainer{
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 100px;
+    padding: 30px 5px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+input[type=file]{
+    display: none;
+}
+
+.input-group.grp-16 .imgcontainer label{
+    display: block;
+    width: 180px;
+    position: relative;
+    background-color: #49ca92;
+    margin: auto;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.input-group.grp-16 .imgcontainer p{
+    text-align: center;
+    margin: 10px auto;
+    font-weight: 300;
+    color: #111;
+}
+
+.input-group.grp-16 #imageschosen{
+    margin: auto;
+    position: relative;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+figure {
+    width: 45%;
+}
+
+figcaption {
+    text-align: center;
+    font-size: .7rem;
+    color: #111;
+}
+
+#imageschosen img{
+    width: 100%;
+}
+
+.registerpropBtn{
+    position: relative;
+    margin-bottom: 40px;
+    outline: none;
+    border-radius: 10px;
+    padding: 5px 20px;
+    background-color: #0ceb8a;
+    border: 1px solid #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    transition: .25s background-color;
+}
+
+.registerpropBtn:hover{
+    background-color: #57CC99;
+}
+
+@media (max-width: 850px) {
+    .form-container {
+        width: 100vw;
+    }
+    .input-group {
+        position: relative;
+        width: 100%;
+    }
+}
+
+
+/* added by caleb */
+
+.loader {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.loader.hidden {
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

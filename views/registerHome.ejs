@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Register a Property</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="registrationstyle.css">
+        <link rel="stylesheet" href="style.css" />
+        <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon" />
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- loader -->
+        <div class="loader">
+            <img src="./media/loading.gif" alt="Loading..."/>
+        </div>
+        <div class="loader2" id="loader2">
+            <img src="./media/loading.gif" alt="Loading..."/>
+        </div>
+
+
+        <div class="TopNav">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="">Find a PG</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
+                        <form action="/logout" method="GET">
+                            <button class="btn btn-outline my-2 my-sm-0" type="submit">Logout</button>
+                        </form>
+                    </ul>                 
+                </div>
+            </nav>
+        </div>
+        <div class="form-container">
+            <form id="myform" action="/home" method="GET" class="register-property">
+                <h1 class="head-title">Register your Property</h1>
+                <div class="input-group grp-1">
+                    <label class="form-label">Property Name</label>
+                    <input type="text" id="Apartment_Name" class="form-input" placeholder="Name of your Accommodation" required/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-2">
+                    <label  class="form-label">Location</label>
+                    <select class="form-input" id="Location" required>
+                        <option selected disabled value="">--Select--</option>
+                        <option value="Andheri">Andheri</option>
+                        <option value="Mira Road">Mira Road</option>
+                        <option value="Bhayander">Bhayander</option>
+                        <option value="Bandra">Bandra</option>
+                        <option value="Borivali">Borivali</option>
+                        <option value="BKC">BKC</option>
+                        <option value="Churchgate">Churchgate</option>
+                        <option value="Charni Road">Charni Road</option>
+                        <option value="Juhu">Juhu</option>
+                        <option value="Chembur">Chembur</option>
+                        <option value="Santacruz">Santacruz</option>
+                        <option value="Dahisar">Dahisar</option>
+                        <option value="Goregaon">Goregaon</option>
+                        <option value="Vile Parle">Vile Parle</option>
+                        <option value="Jogeshwari">Jogeshwari</option>
+                        <option value="Malad">Malad</option>
+                        <option value="Mahim">Mahim</option>
+                        <option value="Prabhadevi">Prabhadevi</option>
+                        <option value="Mumbai Central">Mumbai Central</option>
+                        <option value="Mumbai CST">Mumbai CST</option>
+                        <option value="Kurla">Kurla</option>
+                        <option value="Sion">Sion</option>
+                        <option value="Worli">Worli</option>
+                        <option value="Navi Mumbai">Navi Mumbai</option>
+                        <option value="Kharghar">Kharghar</option>
+                        <option value="King Circle">King Circle</option>
+                        <option value="Wadala">Wadala</option>
+                        <option value="Vasai">Vasai</option>
+                        <option value="Virar">Virar</option>
+                        <option value="Vidya Vihar">Vidya Vihar</option>
+                        <option value="Nahor">Nahor</option>
+                        <option value="Mankhurd">Mankhurd</option>
+                    </select>
+                </div>
+                <div class="input-group grp-3">
+                    <label  class="form-label">Name</label>
+                    <input type="text" id="Owner_Name" value="<%= usr.full_name %>" class="form-input" placeholder="Your Name" />
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-4">
+                    <label  class="form-label">Contact No</label>
+                    <input type="text" id="Owner_Contact" value="<%= usr.mobile %>" class="form-input" placeholder="Your Mobile Number"/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-5">
+                    <label  class="form-label">Email ID</label>
+                    <input id="Owner_Email" type="email" value="<%= usr.email %>" class="form-input" placeholder="Your Email ID"/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-6">
+                    <label  class="form-label">Description</label>
+                    <textarea class="form-input" id="Description" cols="30" rows="3" placeholder="Describe your Accommodation"></textarea>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-7">
+                    <label  class="form-label">Deposit Amount</label>
+                    <input id="Deposit" type="text" class="form-input" placeholder="Deposit Amount"/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group">
+                    <label  class="form-label">Notice Period</label>
+                    <input id="Notice_Period" type="text" class="form-input" placeholder="Notice Period"/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-8">
+                    <label  class="form-label">Available for</label>
+                    <select class="form-input" id="Accommodation" required>
+                        <option selected disabled value="">--Choose--</option>
+                        <option value="Both">Both, Boys and Girls</option>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                    </select>
+                </div>
+                <div class="input-group grp-9">
+                    <label  class="form-label">Maintenance</label>
+                    <input type="text" id="Maintenance" class="form-input" placeholder="Specify the Maintenance Charges" required/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-10">
+                    <label  class="form-label">Electricity Charges</label>
+                    <input type="text" id="Electricity_Charges" class="form-input" placeholder="Specify the Electricity Charges" required/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-11">
+                    <label  class="form-label">Food Availabilty</label>
+                    <select class="form-input" id="Food_Availabilty" required>
+                        <option selected disabled value="">--Choose--</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="input-group grp-12">
+                    <label  class="form-label">Parking</label>
+                    <select class="form-input" id="Parking" required >
+                        <option selected disabled value="">--Choose--</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="input-group grp-13">
+                    <label  class="form-label">Power Backup</label>
+                    <select class="form-input" id="Power_Backup" required>
+                        <option selected disabled value="">--Choose--</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="input-group grp-14">
+                    <label  class="form-label">AC Rooms</label>
+                    <select class="form-input"  id="AC_Rooms" required>
+                        <option selected disabled>--Choose--</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="input-group grp-15">
+                    <label  class="form-label">Number of Beds</label>
+                    <input type="text" id="No_of_Beds" class="form-input" placeholder="Name of your Accommodation"/>
+                    <!-- <small class="form-message"></small> -->
+                </div>
+                <div class="input-group grp-16">
+                    <label for="imgcontainer" class="form-label">Images for your Property</label>
+                    <div class="imgcontainer">
+                        <!-- <input type="file" class="form-images" id="img-files" accept=".jpeg, .jpg, .png" onchange="preview()" multiple/> -->
+                        <input required type="file" class="form-images" id="img-files" accept=".jpeg, .jpg, .png" multiple/>
+                        <label for="img-files">Choose images</label>
+                        <p id="numofimg">No files Chosen</p>
+                        <div id="imageschosen"></div>
+                    </div>
+                </div>
+
+                <button type="submit" id="register" class="registerpropBtn">Register</button>
+                <input type="text" id="userid" value="<%= usr._id %>" style="visibility: hidden;">
+            </form>
+        </div>
+
+        <!-- <script>
+            let imgFiles = document.getElementById('img-files');
+            let imgHolder = document.getElementById('imageschosen');
+            let numOfFiles = document.getElementById('numofimg');
+
+            imgFiles.addEventListener("change", (e)=> {
+                imgHolder.innerHTML = "";
+                numOfFiles.textContent = `${imgFiles.files.length} Images Selected`;
+
+                for (i of imgFiles.files) {
+                    let reader = new FileReader();
+                    let figure = document.createElement('figure');
+                    let figCaption = document.createElement('figCaption');
+
+                    figCaption.innerText = i.name;
+                    figure.appendChild(figCaption);
+
+                    reader.onload=() =>{
+                        let img = document.createElement("img");
+                        img.setAttribute('src', reader.result);
+                        figure.insertBefore(img,figCaption);
+                    }
+                    imgHolder.appendChild(figure);
+                    reader.readAsDataURL(i);
+                }
+            });
+
+            
+        </script> -->
+        <script>
+            window.addEventListener("load", function () {
+        const loader = document.querySelector(".loader");
+        loader.className += " hidden"; //class loader hidden
+    });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+    
+        <script>      
+            var firebaseConfig = {
+                    apiKey: "AIzaSyB7BMa_lGNXlgk9SsGtaY0aKGgA9-swrrw",
+                    authDomain: "pg-website-7495d.firebaseapp.com",
+                    projectId: "pg-website-7495d",
+                    storageBucket: "pg-website-7495d.appspot.com",
+                    messagingSenderId: "901304699853",
+                    appId: "1:901304699853:web:54236ac6f2a0e386d01284",
+                    databaseURL: ""
+                    };
+                    firebase.initializeApp(firebaseConfig);
+
+        // eval(atob(`dmFyIGZpcmViYXNlQ29uZmlnID0ge2FwaUtleTogIkFJemFTeUI3Qk1hX2xHTlhsZ2s5U3NHdGFZMGFLR2dBOS1zd3JydyIsYXV0aERvbWFpbjogInBnLXdlYnNpdGUtNzQ5NWQuZmlyZWJhc2VhcHAuY29tIixwcm9qZWN0SWQ6ICJwZy13ZWJzaXRlLTc0OTVkIixzdG9yYWdlQnVja2V0OiAicGctd2Vic2l0ZS03NDk1ZC5hcHBzcG90LmNvbSIsbWVzc2FnaW5nU2VuZGVySWQ6ICI5MDEzMDQ2OTk4NTMiLGFwcElkOiAiMTo5MDEzMDQ2OTk4NTM6d2ViOjU0MjM2YWM2ZjJhMGUzODZkMDEyODQiLGRhdGFiYXNlVVJMOiAiIn07ZmlyZWJhc2UuaW5pdGlhbGl6ZUFwcChmaXJlYmFzZUNvbmZpZyk7`))
+        </script>
+        <script src="reg.js"></script>
+
+    </body>
+</html>

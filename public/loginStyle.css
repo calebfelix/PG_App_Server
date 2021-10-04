@@ -6,6 +6,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body{
+    background: url(./media/signupBack.jpg);
+    object-fit: cover;
+}
+
 .container {
     width: 500px;
     height: 700px;
@@ -19,7 +24,7 @@
     width: 400px;
     height: 400px;
     position: absolute;
-    background-color: #fcffa67a;
+    background-color: #ffffff;
     border-radius: 10px;
 }
 
@@ -102,6 +107,14 @@ form.login, form.register {
     font-size: 14px;
     font-weight: 200;
     visibility: hidden;
+}
+
+.form-Msg {
+    display: inline-block;
+    width: 100%;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 200;
 }
 
 .form-message.error {

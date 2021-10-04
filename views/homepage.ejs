@@ -22,7 +22,7 @@
         <!-- Navigation Bar  -->
         <div class="TopNav">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="">Find a PG</a>
+                <a class="navbar-brand" href="/">Find a PG</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -32,7 +32,7 @@
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
                         </form>
-                        <li class="nav-item"><a href="#" class="nav-link">Register a Property</a></li>
+                        
                         <div class="dropdown-container">
                             <li class="nav-item-dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="">Accommodation</a>
@@ -43,7 +43,25 @@
                                 </div>
                             </li>
                         </div>
-                        <button class="btn btn-outline my-2 my-sm-0" type="submit">Logout</button>
+
+
+                        <% if(auth === true){ %>
+                            <li class="nav-item"><a href="/register" class="nav-link">Register a Property</a></li>
+                        <% } %>
+
+
+
+                        <!-- <li class="nav-item"><a href="#" class="nav-link">Register a Property</a></li> -->
+                        
+                        <% if(auth === true){ %>
+                            <form action="/logout" method="GET">
+                                <button class="btn btn-outline my-2 my-sm-0" type="submit">Logout</button>
+                            </form>
+                        <% }else{ %>
+                            <form action="/signup">
+                                <button class="btn btn-outline my-2 my-sm-0" type="submit">Login</button>
+                            </form>
+                        <% }%>
                     </ul>                 
                 </div>
             </nav>
@@ -53,6 +71,7 @@
             <div class="row">
                 <% mydata.data.forEach(function(pst) { %>
                     <div class="card col-md-4">
+                        <!-- <img src="<%= pst.img_url[0] %>" class="card-img-top" alt="..."> -->
                         <img src="<%= pst.img_url[0] %>" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title"><%= pst.Apartment_Name %></h5>
@@ -60,7 +79,12 @@
                           <b>Location :</b> <%= pst.Location %> <br>
                           <b>Owner Name :</b> <%= pst.Owner_Name %>
                           <p class="card-text"><b>Description :</b> <%= pst.Description.slice(0, 150) + "  . . ." %></p>
-                          <a href="api/posts/<%= pst._id %>" class="btn btn-primary">Go somewhere</a>
+                          <!-- <a href="/content?id=<%= pst._id %>" class="btn btn-primary">Go somewhere</a> -->
+                          <% if(auth === true){ %>
+                            <a href="/content?id=<%= pst._id %>" class="btn btn-primary">View info</a>
+                        <% } else {%>
+                          <a href="/signup?err=Login%20first%20to%20proceed" class="btn btn-primary">View info</a>
+                            <% } %>
                         </div>
                     </div>
                 <% }); %>  

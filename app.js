@@ -11,6 +11,7 @@ const Post = require('./models/Post');
 const { requireAuth, checkUser } = require('./authMddleware');
 
 const cors = require('cors');
+const { render } = require('ejs');
 const web_url = process.env.WEB_URL;
 
 const app = express();
@@ -32,8 +33,8 @@ app.use(cookieParser());
 // create json web token
 // const maxAge = parseInt(process.env.MAX_AGE);
 const maxAge = 1 * 60 * 60;
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.TOKEN_SECRET , {
+const createToken = (usr) => {
+    return jwt.sign({ usr }, process.env.TOKEN_SECRET , {
         expiresIn: maxAge
     });
 };
@@ -41,25 +42,63 @@ const createToken = (id) => {
 
 // WEBPAGE
 
+app.get('/test', (req, res) => {
+    res.render('test');
+})
+
+app.post('/api/test', (req, res) => {
+    console.log(req.body)
+})
+
+app.post('/saveImage', (req, res) => {
+    console.log(req.body)
+})
+
+
+
 app.get('/', (req, res) => { 
-    res.render('Signup');
+    res.render('index');
 })
 
-app.post('/signup', (req, res) => { 
-    console.log(req.body);
-    res.redirect('/');
-})
+app.get('/signup', (req, res) => {
+    // console.log(req.query.err)
 
-app.get('/home', requireAuth, async (req, res) => { 
-    
+    if(!req.cookies.jwt){
+    if(req.query.err){
+        console.log("sending error")
+        res.render('Signup', { Msg : req.query.err, style : "color:red"})
+    } else if(req.query.succ){
+        console.log("sending Success")
+        res.render('Signup', { Msg : req.query.succ, style : "color:green"})
+    } else{
+        res.render('Signup', { Msg : null })
+    }
+} else{
+    return res.redirect('/home')
+}
+});
+
+// app.post('/signup', (req, res) => { 
+//     console.log(req.body);
+//     res.redirect('/');
+// })
+
+
+
+app.get('/home', async (req, res) => { 
+        let loggedin = false;
     try {
+        if(req.cookies.jwt){
+             loggedin = true;
+        }
         site = `${web_url}/api/posts`
         const data = await axios.get(site);
-        console.log(data);
-        res.render('homepage', { mydata : data});
+        // console.log(data);
+        res.render('homepage', { mydata : data, auth : loggedin});
       } catch (error) {
         console.log(error);
-        res.redirect('/');
+        // res.redirect('/signup');
+        res.redirect('/signup?err=' + encodeURIComponent('Login first to proceed'));
       }   
 })
 
@@ -67,12 +106,25 @@ app.get('/index', (req, res) => {
     res.render('index');
 })
 
-app.get('/register', (req, res) => { 
-    res.render('reg');
+app.get('/register', requireAuth, async (req, res) => { 
+    console.log(req.cookies.jwt)
+    tokendecode = await jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET);
+    console.log(tokendecode.usr)
+    res.render('registerHome',{usr : tokendecode.usr});
 })
 
-app.get('/content', (req, res) => { 
-    res.render('content');
+app.get('/content', async (req, res) => { 
+    const id = req.query.id;
+    // res.send(id)
+    try{
+    site = `${web_url}/api/posts/${id}`
+    console.log(`---------------------------------------------------${site}`)
+    const data = await axios.get(site);
+    console.log(data.data)
+    res.render('content',{pst : data})
+}catch{
+    res.redirect('/signup?err=' + encodeURIComponent('Login first to proceed'));
+}
 })
 
 
@@ -104,16 +156,25 @@ app.get('/api/posts', async (req, res) => {
 });
 
 app.post('/api/posts', async (req, res) => {
+    console.log(req.body)
     const post = new Post({
         Apartment_Name: req.body.Apartment_Name,
         Location: req.body.Location,
         Owner_Name: req.body.Owner_Name,
         Owner_Contact: req.body.Owner_Contact,
         Owner_Email: req.body.Owner_Email,
-        Deposit: req.body.Deposit,
         Description: req.body.Description,
+        Deposit: req.body.Deposit,
+        Notice_Period: req.body.Notice_Period,
         Accommodation: req.body.Accommodation,
-        Notice_Period: req.body.Notice_Period
+        Maintenance : req.body.Maintenance,
+        Electricity_Charges : req.body.Electricity_Charges,
+        Food_Availabilty  : req.body.Food_Availabilty,
+        Parking : req.body.Parking,
+        Power_Backup : req.body.Power_Backup,
+        AC_Rooms : req.body.AC_Rooms ,
+        No_of_Beds : req.body.No_of_Beds,
+        img_url : req.body.img_url
     });
 
     try{
@@ -125,10 +186,9 @@ app.post('/api/posts', async (req, res) => {
 });
 
 app.get('/api/posts/:id', async (req, res) => {
-    // console.log(req.params);
-    const cotent = await Post.findOne({ _id : req.params.id });
-    // console.log(cotent)
-    res.json(cotent);
+    const con = await Post.findOne({ _id : req.params.id });
+    res.json(con);
+
 });
 
 
@@ -154,7 +214,8 @@ app.post('/api/addusr', async (req, res) => {
 
     try{
         const savedUser = await user.save();
-        res.send(`user inserted: ${savedUser._id}`)
+        // res.send(`user inserted: ${savedUser._id}`)
+        res.redirect('/signup?succ=' + encodeURIComponent('User Created successfully'));
     }catch(err){
         res.status(400).send(err);
     }
@@ -164,20 +225,29 @@ app.post('/api/login', async (req, res) => {
 
     console.log(req.body)
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.redirect('/');
+    // if (!user) return res.redirect('/signup');
+    if (!user) return res.redirect('/signup?err=' + encodeURIComponent('Incorrect username or password'));
 
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.redirect('/');
+    // if(!validPass) return res.redirect('/signup');
+    if(!validPass) return res.redirect('/signup?err=' + encodeURIComponent('Incorrect username or password'));
     
     try {
-        const token = createToken(user._id);
+        const token = createToken(user);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         res.status(200).redirect('/home');
     } catch (err) {
-        res.status(400).redirect('/');
+        res.status(400).redirect('/signup?err=' + encodeURIComponent("Couldn't create a session"));
     }
 
 });
+
+// logout
+
+app.get('/logout', (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/signup?succ=' + encodeURIComponent("Logged out"));
+})
 
 process.on('SIGINT', () => {
     mongoose.connection.close(() => {

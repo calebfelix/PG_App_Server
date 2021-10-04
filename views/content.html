@@ -7,17 +7,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <title>Content Page</title>
         <link rel="icon" href="media/favicon.ico" />
-        <link rel="stylesheet" href="content.css" />
+        <link rel="stylesheet" href="./content.css" />
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
     </head>
     <body>
-        <!-- loader -->
-        <div class="loader">
-            <img src="./media/loading.gif" alt="Loading..."/>
-        </div>
-        
-
         <!-- Navigation Bar  -->
         <div class="TopNav">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -27,53 +21,23 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="/register" class="nav-link">Register a Property</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Register a Property</a></li>
                     </ul>   
-                    
-                    <form action="/logout" method="GET">
-                        <button class="btn btn-outline my-2 my-sm-0" type="submit">Logout</button>
-                    </form>           
+                    <button class="btn btn-outline my-2 my-sm-0" type="submit">Logout</button>              
                 </div>
             </nav>
         </div>
         <div class="content-container">
-
-
             <div class="Images">
                 <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
-
-                        <% for (let i = 0; i < pst.data.img_url.length; i++) { %>
-                            <% if(i === 0){ %>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>" class="active" aria-current="true" aria-label="Slide <%= i+1 %>"></button>
-                                <% } else{ %>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>" aria-label="Slide <%= i+1 %>"></button>
-                               <% }%>
-                            <% } %>
-
-                        
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                     </div>
                     <div class="carousel-inner">
-
-
-                        <% for (let i = 0; i < pst.data.img_url.length; i++) { %>
-                            <!-- <%= i %> -->
-                            <% if(i === 0){ %>
-                                <div class="carousel-item active">
-                                    <img src="<%= pst.data.img_url[i] %>" class="d-block w-100" alt="...">
-                                </div>
-                                <% } else{ %>
-                                    <div class="carousel-item">
-                                        <img src="<%= pst.data.img_url[i] %>" class="d-block w-100" alt="...">
-                                    </div>
-                                    <% }%>
-                            <% } %>
-
-
-
-
-                        <!-- <div class="carousel-item active">
+                        <div class="carousel-item active">
                             <img src="./media/Forest.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
@@ -84,7 +48,7 @@
                         </div>
                         <div class="carousel-item">
                             <img src="./media/Forest.jpg" class="d-block w-100" alt="...">
-                        </div> -->
+                        </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -98,18 +62,19 @@
             </div>
             <div class="info">
                 <div class="Title">
-                    <h1><%= pst.data.Apartment_Name %></h1>
-                    <p><%= pst.data.Location %></p>
+                    <h1>Subodh Paying Guests</h1>
+                    <p>Malad, West</p>
                 </div>
                 <div class="description">
                     <p>
-                        <%= pst.data.Description %>
+                        Searching for a well-designed PG accommodation with spacious rooms well, your search ends now as here is the splendidly designed paying guest available 
+on a rental basis and is situated in one of the prominent locales of Goregaon East, Mumbai. Strategically located close to all your useful conveniences and public transport facilities, this paying guest is definitely worth your consideration.
                     </p>
                 </div>
                 <div class="Depo">
                     <div class="txt">
                         <p>Deposit Amount:</p>
-                        <h2>₹ <%= pst.data.Deposit %></h2>
+                        <h2>₹100</h2>
                     </div>
                     <div class="contbtn">
                         <button class="btn" type="submit" style="margin-top:20px;width: 150px; height: 40px;">Contact Host</button>
@@ -122,7 +87,7 @@
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                  Phone No: <%= pst.data.Owner_Contact %>
+                                  Phone NO: 1234567890
                                 </div>
                               </div>
                             </div>
@@ -135,56 +100,49 @@
             <ul class="congrid" style="padding: 0 auto;">
                 <ul class="gridItems">
                     <div class="info">Owner Name</div>
-                    <div class="val"><%= pst.data.Owner_Name %></div>
+                    <div class="val">NIhal Nageshwar Shah</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Owner Email</div>
-                    <div class="val"><%= pst.data.Owner_Email %></div>
+                    <div class="val">201903044.nihalsnb@student.xavier.ac.in</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Maintainance</div>
-                    <div class="val"><%= pst.data.Maintenance %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Electricity charges</div>
-                    <div class="val"><%= pst.data.Electricity_Charges %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Parking</div>
-                    <div class="val"><%= pst.data.Parking %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">AC Rooms</div>
-                    <div class="val"><%= pst.data.AC_Rooms %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Notice Period</div>
-                    <div class="val"><%= pst.data.Notice_Period %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Food Availabiulty</div>
-                    <div class="val"><%= pst.data.Food_Availabilty %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Power Backup</div>
-                    <div class="val"><%= pst.data.Power_Backup %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">Deposit amount</div>
-                    <div class="val">₹ <%= pst.data.Deposit %></div>
+                    <div class="val">abc</div>
                 </ul>
                 <ul class="gridItems">
                     <div class="info">No. of Beds</div>
-                    <div class="val"><%= pst.data.No_of_Beds %></div>
+                    <div class="val">abc</div>
                 </ul>
             </ul>
         </div>
-
-        <script>
-            window.addEventListener("load", function () {
-        const loader = document.querySelector(".loader");
-        loader.className += " hidden"; //class loader hidden
-    });
-        </script>
     </body>
 </html>
