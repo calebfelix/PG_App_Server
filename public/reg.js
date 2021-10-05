@@ -37,11 +37,6 @@ imgFiles.addEventListener("change", (e) => {
     }
 });
 
-// document.getElementById('register').addEventListener('click', (e)=>{
-//     console.log("it passes");
-//     document.getElementById('loader2').style.visibility = 'visible';
-// })
-
 
 form.addEventListener("submit", async (e)=>{
 
@@ -68,23 +63,6 @@ document.getElementById('loader2').style.visibility = 'visible';
     const Power_Backup = document.getElementById("Power_Backup").value;
     const AC_Rooms = document.getElementById("AC_Rooms").value;
     const No_of_Beds = document.getElementById("No_of_Beds").value;
-
-    console.log(Apartment_Name)
-    console.log(Location)
-    console.log(Owner_Name)
-    console.log(Owner_Contact)
-    console.log(Owner_Email)
-    console.log(Description)
-    console.log(Deposit)
-    console.log(Notice_Period)
-    console.log(Accommodation)
-    console.log(Maintenance)
-    console.log(Electricity_Charges)
-    console.log(Food_Availabilty)
-    console.log(Parking)
-    console.log(Power_Backup)
-    console.log(AC_Rooms)
-    console.log(No_of_Beds)
     
     var FILES = []
         const myfile = document.querySelector("#img-files").files;
@@ -133,7 +111,5 @@ document.getElementById('loader2').style.visibility = 'visible';
     }catch(err){
         console.log(err)
     }
-        
-    // return true;
 
 });

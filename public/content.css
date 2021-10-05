@@ -87,6 +87,7 @@
     object-fit: contain;
 }
 .Images{
+    object-fit: contain;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -145,7 +146,7 @@
     .Images{
         /* position: absolute; */
         width: 50%;
-        max-height: 29%;
+        height: 376px;
         padding: 0px 10px;
     }
     .content-container{
@@ -155,6 +156,7 @@
     }
     .content-container .info{
         width: 50%;
+        height: 376px;
     }
     .congrid{
         width: 70%;
