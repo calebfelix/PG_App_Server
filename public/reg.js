@@ -5,10 +5,10 @@ form = document.getElementById("myform");
 usrid = document.getElementById("userid").value;
 
 // local dev
-var web_url = "http://localhost:5000"
+// var web_url = "http://localhost:5000"
 
 // prouction
-// var web_url = "https://pg-api-app.herokuapp.com"
+var web_url = "https://pg-api-app.herokuapp.com"
 
 
 imgFiles.addEventListener("change", (e) => {
