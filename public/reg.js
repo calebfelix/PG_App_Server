@@ -5,10 +5,10 @@ form = document.getElementById("myform");
 usrid = document.getElementById("userid").value;
 
 // local dev
-// var web_url = "http://localhost:5000"
+var web_url = "http://localhost:5000"
 
 // prouction
-var web_url = "https://pg-api-app.herokuapp.com"
+// var web_url = "https://pg-api-app.herokuapp.com"
 
 
 imgFiles.addEventListener("change", (e) => {
@@ -68,11 +68,11 @@ document.getElementById('loader2').style.visibility = 'visible';
         const myfile = document.querySelector("#img-files").files;
         console.log(myfile)
         
-          
+        const ref = firebase.storage().ref()
         for (let i = 0; i < myfile.length; i++) {
-            const ref = firebase.storage().ref()
+            
             const file = document.querySelector("#img-files").files[i];
-            const name = `images/${usrid}/${file.name}_${i+1}`
+            const name = `images/${usrid}/${String(Date.now())}_${i+1}`
             const metadata = {
                     contentType : file.type
                 }

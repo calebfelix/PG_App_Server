@@ -9,11 +9,16 @@
         <link rel="icon" href="media/favicon.ico">
     </head>
     <body>
+        <nav style="position: fixed; z-index: 999; ">
+            <a href="/home" style="text-decoration: none;margin:20px;color: azure;background-color: #57CC99; padding: 5px;border-radius:5px;"> Proceed without Login</a>
+        </nav>
         <div class="container">
             <!-- login form -->
             <div class="form-box" id="log">
                 <form id="login" class="login" method="POST" action="/api/login">
+
                     <h2 class="title">Login</h2>
+                    
                     <div class="input-group">
                         <label for="username" class="input-label">Email ID</label>
                         <input type="email" name="email" id="username" class="form-control" placeholder="Your Email ID" required>
@@ -28,7 +33,9 @@
                         <% } %>
                         
                     </div>
-                    <button class="btn" id="login-btn" type="submit">Log in</button>
+                    <br>
+                    <!-- <a href="/home" style="text-decoration: none;"> Explore without Login</a> -->
+                    <button class="btn" id="login-btn" type="submit">Log in</button> 
                     
                 </form>
                 <div class="toggler">

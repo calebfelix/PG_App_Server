@@ -78,12 +78,6 @@ app.get('/signup', (req, res) => {
 }
 });
 
-// app.post('/signup', (req, res) => { 
-//     console.log(req.body);
-//     res.redirect('/');
-// })
-
-
 
 app.get('/home', async (req, res) => { 
         let loggedin = false;
