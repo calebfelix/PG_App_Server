@@ -42,26 +42,11 @@ const createToken = (usr) => {
 
 // WEBPAGE
 
-app.get('/test', (req, res) => {
-    res.render('test');
-})
-
-app.post('/api/test', (req, res) => {
-    console.log(req.body)
-})
-
-app.post('/saveImage', (req, res) => {
-    console.log(req.body)
-})
-
-
-
 app.get('/', (req, res) => { 
     res.render('index');
 })
 
 app.get('/signup', (req, res) => {
-    // console.log(req.query.err)
 
     if(!req.cookies.jwt){
     if(req.query.err){
@@ -80,12 +65,28 @@ app.get('/signup', (req, res) => {
 
 
 app.get('/home', async (req, res) => { 
+
+    var homepage = req.query.getpage || 1;
         let loggedin = false;
+        console.log(req.query)
+
     try {
         if(req.cookies.jwt){
              loggedin = true;
         }
-        site = `${web_url}/api/posts`
+        if(req.query.Location && req.query.Accommodation){
+            site = `${web_url}/api/posts?page=${homepage}&Location=${req.query.Location}&Accommodation=${req.query.Accommodation}`
+            console.log(site)
+        }else if(req.query.Accommodation){
+            site = `${web_url}/api/posts?page=${homepage}&Accommodation=${req.query.Accommodation}`
+            console.log(site)
+        }else if(req.query.Location){
+            site = `${web_url}/api/posts?page=${homepage}&Location=${req.query.Location}`
+            console.log(site)
+        }else{
+            site = `${web_url}/api/posts?page=${homepage}`
+            console.log(site)
+        }
         const data = await axios.get(site);
         // console.log(data);
         res.render('homepage', { mydata : data, auth : loggedin});
@@ -109,7 +110,6 @@ app.get('/register', requireAuth, async (req, res) => {
 
 app.get('/content', async (req, res) => { 
     const id = req.query.id;
-    // res.send(id)
     try{
     site = `${web_url}/api/posts/${id}`
     console.log(`---------------------------------------------------${site}`)
@@ -140,14 +140,80 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
+
 app.get('/api/posts', async (req, res) => {
-    try{        
-        const posts = await Post.find();
-        res.json(posts);
+    try{  
+        
+        const resPerPage = 3;
+        const page = req.query.page || 1;
+
+        // Location & Accommodation search filter
+        if(req.query.Location && req.query.Accommodation){
+            const Location = req.query.Location;
+            const Accommodation = req.query.Accommodation;
+            const posts = await Post.find({Location: Location, Accommodation: Accommodation})
+                .skip((resPerPage * page) - resPerPage)
+                .limit(resPerPage);
+            const numOfPost = await Post.count({Location: Location, Accommodation: Accommodation})
+
+            return res.json({
+                posts: posts,
+                numOfPost : numOfPost,
+                currentPage : page,
+                pages: Math.ceil(numOfPost / resPerPage),
+        });
+        }
+        
+         // Accommodation search filter
+         if(req.query.Accommodation){
+            const Accommodation = req.query.Accommodation;
+            const posts = await Post.find({Accommodation: Accommodation})
+                .skip((resPerPage * page) - resPerPage)
+                .limit(resPerPage);
+            const numOfPost = await Post.count({Accommodation: Accommodation})
+
+            return res.json({
+                posts: posts,
+                numOfPost : numOfPost,
+                currentPage : page,
+                pages: Math.ceil(numOfPost / resPerPage),
+        });
+        }
+
+
+        // Location search filter
+        if(req.query.Location){
+            const Location = req.query.Location;
+            const posts = await Post.find({Location: Location})
+                .skip((resPerPage * page) - resPerPage)
+                .limit(resPerPage);
+            const numOfPost = await Post.count({Location: Location})
+
+            return res.json({
+                posts: posts,
+                numOfPost : numOfPost,
+                currentPage : page,
+                pages: Math.ceil(numOfPost / resPerPage),
+        });
+        }
+
+             
+        const posts = await Post.find({})
+            .skip((resPerPage * page) - resPerPage)
+            .limit(resPerPage);
+        const numOfPost = await Post.count({})
+
+        return res.json({
+            posts: posts,
+            numOfPost : numOfPost,
+            currentPage : page,
+            pages: Math.ceil(numOfPost / resPerPage),
+        });
     }catch(error){
         res.json(error);
     }
 });
+
 
 app.post('/api/posts', async (req, res) => {
     console.log(req.body)
@@ -219,11 +285,9 @@ app.post('/api/login', async (req, res) => {
 
     console.log(req.body)
     const user = await User.findOne({ email: req.body.email });
-    // if (!user) return res.redirect('/signup');
     if (!user) return res.redirect('/signup?err=' + encodeURIComponent('Incorrect username or password'));
 
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    // if(!validPass) return res.redirect('/signup');
     if(!validPass) return res.redirect('/signup?err=' + encodeURIComponent('Incorrect username or password'));
     
     try {
@@ -237,7 +301,6 @@ app.post('/api/login', async (req, res) => {
 });
 
 // logout
-
 app.get('/logout', (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 });
     res.redirect('/signup?succ=' + encodeURIComponent("Logged out"));
