@@ -9,6 +9,12 @@
         <link rel="icon" href="media/favicon.ico">
     </head>
     <body>
+
+        <!-- loader -->
+        <div class="loader">
+            <img src="./media/loading.gif" style="width: 50px; height: 50px;" alt="Loading..."/>
+        </div>
+        
         <nav style="position: fixed; z-index: 999; ">
             <a href="/home" style="text-decoration: none;margin:20px;color: azure;background-color: #57CC99; padding: 5px;border-radius:5px;"> Proceed without Login</a>
         </nav>
@@ -101,6 +107,12 @@
                 x.style.left = "50px";
                 y.style.left = "550px";
             }
+        </script>
+        <script>
+            window.addEventListener("load", function () {
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden"; //class loader hidden
+            });
         </script>
         <script src="validation.js"></script>
     </body>

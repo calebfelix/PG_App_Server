@@ -15,7 +15,7 @@
 
         <!-- loader -->
         <div class="loader">
-            <img src="./media/loading.gif" alt="Loading..."/>
+            <img src="./media/loading.gif" style="width: 50px; height: 50px;" alt="Loading..."/>
         </div>
 
 
@@ -31,7 +31,8 @@
                         <form class="form-inline my-2 my-lg-0">
                             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search By Location" aria-label="Search"> -->
                             <!-- <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button> -->
-                            
+                                
+
                             <select name="Location" class="custom-select" style="margin-right: 12px;" >
                                 <option selected disabled value="">Search By Location</option>
                                 <option value="Andheri">Andheri</option>
@@ -145,30 +146,113 @@
         <% } %>
         </div>
         <br>
+
+        
+        <% if(mydata.data.url_href.includes("Accommodation") && mydata.data.url_href.includes("Location")){ %>
+            <!-- pagination if both Accommodation and Location -->
+            <div class="footer">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <!-- Previous -->
+                    <% if(parseInt(mydata.data.currentPage) - 1 === 0){ %>
+                        <% } else{ %>
+                        <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) - 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <% } %>
+                        <!-- Pages -->
+                    <%  for (let j = 1; j < mydata.data.pages + 1 ; j++) { %>
+                        <% if (j === parseInt(mydata.data.currentPage)){%>
+                            <li class="page-item active"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                            <% } else{ %>
+                        <li class="page-item"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                            <%  } %>
+                            <%  } %>
+                        <!-- Next -->
+                    <% if(parseInt(mydata.data.currentPage) + 1 > mydata.data.pages){ %>
+                        <% } else{ %>
+                        <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) + 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>     
+                    <% } %>
+                    </ul>
+                  </nav>
+            </div> 
+            <%} else if(mydata.data.url_href.includes("Accommodation")) {%>
+                <!-- pagination if both Accommodation -->
         <div class="footer">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-
                     <!-- Previous -->
                 <% if(parseInt(mydata.data.currentPage) - 1 === 0){ %>
                     <% } else{ %>
-                    <li class="page-item"><a class="page-link" href="/home?getpage=<%= parseInt(mydata.data.currentPage) - 1 %>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) - 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                 <% } %>
-
                     <!-- Pages -->
                 <%  for (let j = 1; j < mydata.data.pages + 1 ; j++) { %>
-                    <li class="page-item"><a class="page-link" href="/home?getpage=<%= j %>"><%= j %></a>
-                <%  } %>
-
+                    <% if (j === parseInt(mydata.data.currentPage)){%>
+                        <li class="page-item active"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                        <% } else{ %>
+                    <li class="page-item"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                        <%  } %>
+                        <%  } %>
                     <!-- Next -->
                 <% if(parseInt(mydata.data.currentPage) + 1 > mydata.data.pages){ %>
                     <% } else{ %>
-                    <li class="page-item"><a class="page-link" href="/home?getpage=<%= parseInt(mydata.data.currentPage) + 1 %>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>     
+                    <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) + 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>     
                 <% } %>
-
                 </ul>
               </nav>
         </div>
+        <% } else if(mydata.data.url_href.includes("Location")) {%>
+            <!-- pagination if both Location -->
+        <div class="footer">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <!-- Previous -->
+                <% if(parseInt(mydata.data.currentPage) - 1 === 0){ %>
+                    <% } else{ %>
+                    <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) - 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <% } %>
+                    <!-- Pages -->
+                <%  for (let j = 1; j < mydata.data.pages + 1 ; j++) { %>
+                    <% if (j === parseInt(mydata.data.currentPage)){%>
+                        <li class="page-item active"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                        <% } else{ %>
+                    <li class="page-item"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                        <%  } %>
+                        <%  } %>
+                    <!-- Next -->
+                <% if(parseInt(mydata.data.currentPage) + 1 > mydata.data.pages){ %>
+                    <% } else{ %>
+                    <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) + 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>     
+                <% } %>
+                </ul>
+              </nav>
+        </div>
+            <% } else {%>
+                <!-- pagination if nothing -->
+            <div class="footer">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <!-- Previous -->
+                    <% if(parseInt(mydata.data.currentPage) - 1 === 0){ %>
+                        <% } else{ %>
+                        <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) - 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <% } %>
+                        <!-- Pages -->
+                    <%  for (let j = 1; j < mydata.data.pages + 1 ; j++) { %>
+                        <% if (j === parseInt(mydata.data.currentPage)){%>
+                            <li class="page-item active"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                            <% } else{ %>
+                        <li class="page-item"><a class="page-link" href="/home?page=<%= j %><%=mydata.data.url_href.slice(17)%>"><%= j %></a>
+                            <%  } %>
+                            <%  } %>
+                        <!-- Next -->
+                    <% if(parseInt(mydata.data.currentPage) + 1 > mydata.data.pages){ %>
+                        <% } else{ %>
+                        <li class="page-item"><a class="page-link" href="/home?page=<%= parseInt(mydata.data.currentPage) + 1 %><%=mydata.data.url_href.slice(17)%>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>     
+                    <% } %>
+                    </ul>
+                  </nav>
+            </div>
+                <% } %>
 
         <script>
             window.addEventListener("load", function () {

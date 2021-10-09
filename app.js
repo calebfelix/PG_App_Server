@@ -41,7 +41,6 @@ const createToken = (usr) => {
 
 
 // WEBPAGE
-
 app.get('/', (req, res) => { 
     res.render('index');
 })
@@ -66,7 +65,7 @@ app.get('/signup', (req, res) => {
 
 app.get('/home', async (req, res) => { 
 
-    var homepage = req.query.getpage || 1;
+    var homepage = req.query.page || 1;
         let loggedin = false;
         console.log(req.query)
 
@@ -144,7 +143,7 @@ app.get('/api/users', async (req, res) => {
 app.get('/api/posts', async (req, res) => {
     try{  
         
-        const resPerPage = 3;
+        const resPerPage = 1;
         const page = req.query.page || 1;
 
         // Location & Accommodation search filter
@@ -155,12 +154,14 @@ app.get('/api/posts', async (req, res) => {
                 .skip((resPerPage * page) - resPerPage)
                 .limit(resPerPage);
             const numOfPost = await Post.count({Location: Location, Accommodation: Accommodation})
+            console.log(posts)
 
             return res.json({
                 posts: posts,
                 numOfPost : numOfPost,
                 currentPage : page,
                 pages: Math.ceil(numOfPost / resPerPage),
+                url_href: req._parsedOriginalUrl.path
         });
         }
         
@@ -171,12 +172,14 @@ app.get('/api/posts', async (req, res) => {
                 .skip((resPerPage * page) - resPerPage)
                 .limit(resPerPage);
             const numOfPost = await Post.count({Accommodation: Accommodation})
+            console.log(req._parsedOriginalUrl.path)
 
             return res.json({
                 posts: posts,
                 numOfPost : numOfPost,
                 currentPage : page,
                 pages: Math.ceil(numOfPost / resPerPage),
+                url_href: req._parsedOriginalUrl.path
         });
         }
 
@@ -194,6 +197,7 @@ app.get('/api/posts', async (req, res) => {
                 numOfPost : numOfPost,
                 currentPage : page,
                 pages: Math.ceil(numOfPost / resPerPage),
+                url_href: req._parsedOriginalUrl.path
         });
         }
 
@@ -208,6 +212,7 @@ app.get('/api/posts', async (req, res) => {
             numOfPost : numOfPost,
             currentPage : page,
             pages: Math.ceil(numOfPost / resPerPage),
+            url_href: req._parsedOriginalUrl.path
         });
     }catch(error){
         res.json(error);
@@ -258,7 +263,6 @@ app.post('/api/addusr', async (req, res) => {
     if (emailExist) return res.send("email already Exists")
 
     // hashing password
-
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     console.log(hashedPassword);
