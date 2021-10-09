@@ -144,7 +144,7 @@ app.get('/api/users', async (req, res) => {
 app.get('/api/posts', async (req, res) => {
     try{  
         
-        const resPerPage = 1;
+        const resPerPage = 3;
         const page = req.query.page || 1;
 
         // Location & Accommodation search filter

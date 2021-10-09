@@ -61,30 +61,15 @@
                             <!-- <%= i %> -->
                             <% if(i === 0){ %>
                                 <div class="carousel-item active">
-                                    <img src="<%= pst.data.img_url[i] %>" class="d-block w-100" alt="...">
+                                    <img src="<%= pst.data.img_url[i] %>" class="d-block w-100" alt="..." onerror=this.src="https://firebasestorage.googleapis.com/v0/b/pg-website-7495d.appspot.com/o/default.png?alt=media">
                                 </div>
                                 <% } else{ %>
                                     <div class="carousel-item">
-                                        <img src="<%= pst.data.img_url[i] %>" class="d-block w-100" alt="...">
+                                        <img src="<%= pst.data.img_url[i] %>" class="d-block w-100" alt="..." onerror=this.src="https://firebasestorage.googleapis.com/v0/b/pg-website-7495d.appspot.com/o/default.png?alt=media">
                                     </div>
                                     <% }%>
                             <% } %>
 
-
-
-
-                        <!-- <div class="carousel-item active">
-                            <img src="./media/Forest.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./media/Forest.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./media/Forest.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./media/Forest.jpg" class="d-block w-100" alt="...">
-                        </div> -->
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

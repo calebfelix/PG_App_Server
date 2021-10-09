@@ -126,7 +126,7 @@
                 <% mydata.data.posts.forEach(function(pst) { %>
                     <div class="card col-md-4">
                         <!-- <img src="<%= pst.img_url[0] %>" class="card-img-top" alt="..."> -->
-                        <img src="<%= pst.img_url[0] %>" class="card-img-top" alt="...">
+                        <img src="<%= pst.img_url[0] %>" class="card-img-top" alt="..." onerror=this.src="https://firebasestorage.googleapis.com/v0/b/pg-website-7495d.appspot.com/o/default.png?alt=media">
                         <div class="card-body">
                           <h5 class="card-title"><%= pst.Apartment_Name %></h5>
                           <!-- Apartment Name : <b><%= pst.Apartment_Name %></b> <br> -->
