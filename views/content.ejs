@@ -16,7 +16,9 @@
         <div class="loader">
             <img src="./media/loading.gif" style="width: 50px; height: 50px;" alt="Loading..."/>
         </div>
-        
+        <div class="loader2" id="loader2">
+            <img src="./media/loading.gif" style="width: 50px; height: 50px;" alt="Loading..."/>
+        </div>
 
         <!-- Navigation Bar  -->
         <div class="TopNav">
@@ -97,7 +99,42 @@
                         <h2>₹ <%= pst.data.Deposit %></h2>
                     </div>
                     <div class="contbtn">
-                        <button class="btn" type="submit" style="margin-top:20px;width: 150px; height: 40px;">Contact Host</button>
+                        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#email" style="margin-top:20px;width: 150px; height: 40px;">Contact Host</button>
+                        <div class="modal fade" id="email" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h6 class="modal-title" id="exampleModalLabel">Contact Host</h6>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="con-form" onsubmit="sendEmail(event)">
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Name:</label>
+                                            <input type="text" class="form-control" id="recipient-name" required>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="recipient-name" class="col-form-label">Email</label>
+                                            <input type="email" class="form-control" id="recipient-email" required>
+                                        </div><div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Phone Number</label>
+                                            <input type="text" class="form-control" id="recipient-phone" required >
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="message-text" class="col-form-label">Message</label>
+                                            <textarea required class="form-control" id="message-text" ></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Send message</button>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                                
+                              </div>
+                            </div>
+                        </div>
                         <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#phno" style="margin-top:20px;width: 200px; height: 40px;">View Phone Number</button>
                         <div class="modal fade" id="phno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -107,7 +144,7 @@
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                  Phone No: <%= pst.data.Owner_Contact %>
+                                  Phone NO: <%= pst.data.Owner_Contact %>
                                 </div>
                               </div>
                             </div>
@@ -168,12 +205,54 @@
                 </ul>
             </ul>
         </div>
-
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
         <script>
             window.addEventListener("load", function () {
         const loader = document.querySelector(".loader");
         loader.className += " hidden"; //class loader hidden
-    });
+         });
         </script>
+         <script type="text/javascript">
+             function sendEmail(event) {
+                 event.preventDefault();
+                 document.getElementById('loader2').style.visibility = 'visible';
+                 console.log("submitted");
+
+
+                 let form = document.getElementById("con-form");
+                 let name = document.getElementById("recipient-name");
+                 let phone = document.getElementById("recipient-phone");
+                 let email = document.getElementById("recipient-email");
+                 let messageText = document.getElementById("message-text");
+                 
+                 Email.send({
+                     Host: "smtp.gmail.com",
+                     Username: "testforprojects01@gmail.com",
+                     Password: "testforemail@2001",
+                     To: "<%= pst.data.Owner_Email %>",
+                     From: "testforprojects01@gmail.com",
+                     Subject: "Request from a User",
+                     Body: "Someone is interested in the PG you've listed on our website.<h2>Name: " +name.value +"</h2><h2>Phone No:" +phone.value+"</h2><h2>Email:" +email.value+"</h2><h2>Message:" + messageText.value +"</h2>",
+                 }).then(function (message) {
+                     ul = window.location.href.split('/')
+                     myul = `${ul[0]}/${ul[1]}/${ul[2]}/home`
+                     location.replace(myul);
+                     alert("Owner has been notified and shall contact you soon!!");
+                 });
+             
+                 
+                }
+         </script>
+         <!-- <script>
+             function sendEmail(event) {
+                event.preventDefault()
+                ul = window.location.href.split('/')
+                myul = `${ul[0]}/${ul[1]}/${ul[2]}/home`
+                document.getElementById('loader2').style.visibility = 'visible';
+                location.replace(myul);
+                alert("Owner has been notified and shall contact you soon!!");
+                 
+             }
+         </script> -->
     </body>
 </html>
