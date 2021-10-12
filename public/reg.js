@@ -69,10 +69,11 @@ document.getElementById('loader2').style.visibility = 'visible';
         console.log(myfile)
         
         const ref = firebase.storage().ref()
+        const datenow = String(Date.now());
         for (let i = 0; i < myfile.length; i++) {
             
             const file = document.querySelector("#img-files").files[i];
-            const name = `images/${usrid}/${String(Date.now())}${Owner_Name}/${String(Date.now())}_${i+1}`
+            const name = `images/${usrid}/${datenow}${Owner_Name}/${String(Date.now())}_${i+1}`
             const metadata = {
                     contentType : file.type
                 }
