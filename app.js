@@ -261,7 +261,16 @@ app.get('/api/posts/:id', async (req, res) => {
 app.post('/api/addusr', async (req, res) => {
     // check email exists
     const emailExist = await User.findOne({ email: req.body.email });
-    if (emailExist) return res.send("email already Exists")
+    if (emailExist) return res.redirect('/signup?err=' + encodeURIComponent("email already Exists"));
+    
+    // check Valid phoneno
+    var phone = /^\d{10}$/;
+    if (!(req.body.mobile.match(phone))) return res.redirect('/signup?err=' + encodeURIComponent("Please enter your valid Mobile number"));
+
+     // check Valid password
+    if (String(req.body.password).length < 8) return res.redirect('/signup?err=' + encodeURIComponent("Password must contain more than 8 characters"));
+    if (req.body.password !== req.body.conpassword) return res.redirect('/signup?err=' + encodeURIComponent("Password and confirm password must be same"));
+    
 
     // hashing password
     const salt = await bcrypt.genSalt(10);
