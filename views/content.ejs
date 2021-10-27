@@ -215,8 +215,9 @@
          <script type="text/javascript">
              function sendEmail(event) {
                  event.preventDefault();
+
                  document.getElementById('loader2').style.visibility = 'visible';
-                 console.log("submitted");
+                 console.log("submitted <%= pst.data.Owner_Email %>");
 
 
                  let form = document.getElementById("con-form");
@@ -228,16 +229,18 @@
                  Email.send({
                      Host: "smtp.gmail.com",
                      Username: "testforprojects01@gmail.com",
-                     Password: "testforemail@2001",
+                     Password: "testforemail@2001PG",
                      To: "<%= pst.data.Owner_Email %>",
                      From: "testforprojects01@gmail.com",
                      Subject: "Request from a User",
                      Body: "Someone is interested in the PG you've listed on our website.<h2>Name: " +name.value +"</h2><h2>Phone No:" +phone.value+"</h2><h2>Email:" +email.value+"</h2><h2>Message:" + messageText.value +"</h2>",
                  }).then(function (message) {
+                     console.log(message)
+                    alert("Owner has been notified and shall contact you soon!!");
                      ul = window.location.href.split('/')
                      myul = `${ul[0]}/${ul[1]}/${ul[2]}/home`
                      location.replace(myul);
-                     alert("Owner has been notified and shall contact you soon!!");
+                     
                  });
              
                  
