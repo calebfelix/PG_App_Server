@@ -46,6 +46,10 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+app.get('/aboutus', (req, res) => { 
+    res.render('AboutUs');
+})
+
 app.get('/signup', (req, res) => {
 
     if(!req.cookies.jwt){
