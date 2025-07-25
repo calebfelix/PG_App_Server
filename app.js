@@ -109,7 +109,7 @@ app.get('/register', requireAuth, async (req, res) => {
     console.log(req.cookies.jwt)
     tokendecode = await jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET);
     console.log(tokendecode.usr)
-    res.render('registerHome',{usr : tokendecode.usr});
+    res.render('registerHome', {web_url: web_url || 'http://localhost:5000', usr : tokendecode.usr});
 })
 
 app.get('/content', async (req, res) => { 
